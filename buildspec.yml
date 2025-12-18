@@ -2,8 +2,7 @@ version: 0.2
 
 env:
   variables:
-    AWS_REGION: ap-south-1
-    ECR_REPO: my-app
+    AWS_REGION: eu-north-1
     EKS_CLUSTER: my-eks-cluster
 
 phases:
@@ -14,16 +13,23 @@ phases:
 
   build:
     commands:
-      - echo Build Docker image
-      - docker build -t $ECR_REPO .
-      - docker tag $ECR_REPO:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO:latest
+      - echo Build backend image
+      - docker build -t backend ./backend
+      - docker tag backend:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/backend:latest
+
+      - echo Build frontend image
+      - docker build -t frontend ./frontend
+      - docker tag frontend:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/frontend:latest
+
+      - echo Build nginx image
+      - docker build -t nginx ./nginx
+      - docker tag nginx:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/nginx:latest
 
   post_build:
     commands:
-      - echo Push image to ECR
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO:latest
-      - echo Deploy to EKS
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/backend:latest
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/frontend:latest
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/nginx:latest
+
       - aws eks update-kubeconfig --region $AWS_REGION --name $EKS_CLUSTER
-      - sed -i "s|IMAGE_URI|$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO:latest|g" deployment.yml
-      - kubectl apply -f deployment.yml
-      - kubectl apply -f service.yml
+      - kubectl apply -f k8/
