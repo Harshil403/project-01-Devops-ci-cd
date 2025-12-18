@@ -17,16 +17,24 @@ spec:
         image: harshil403/todo-backend:latest
         ports:
         - containerPort: 5000
+
+        envFrom:
+        - secretRef:
+            name: postgres-secret
+
         env:
         - name: DATABASE_URL
-          value: postgresql://postgres:postgres@postgres:5432/tododb
+          value: postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres:5432/$(POSTGRES_DB)
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: backend
 spec:
-  ports:
-    - port: 5000
   selector:
     app: todo-backend
+  ports:
+    - port: 5000
+      targetPort: 5000
+
