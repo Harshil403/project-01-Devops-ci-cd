@@ -1,4 +1,6 @@
 from flask import Flask, request, jsonify
+from prometheus_flask_exporter import PrometheusMetrics
+
 import os
 import sys
 import time
@@ -9,6 +11,15 @@ sys.path.append("/app")
 from model import db, Todo   # 👈 IMPORTANT (model, not models)
 
 app = Flask(__name__)
+
+metrics = PrometheusMetrics(app)
+
+# Custom app info metric
+metrics.info(
+    "todo_app_info",
+    "ToDo application info",
+    version="1.0.0"
+)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
     "DATABASE_URL",
