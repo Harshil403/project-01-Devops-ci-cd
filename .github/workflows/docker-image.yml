@@ -37,6 +37,7 @@ jobs:
     - name: Deploy manifests
       run: |
         kubectl apply -f k8/
+        kubectl apply -f k8/monitoring/
 
     - name: Wait for deployments to be ready
       run: |
