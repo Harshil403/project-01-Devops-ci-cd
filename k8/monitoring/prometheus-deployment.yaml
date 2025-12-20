@@ -26,6 +26,7 @@ spec:
       - name: config
         configMap:
           name: prometheus-config
+
 ---
 apiVersion: v1
 kind: Service
