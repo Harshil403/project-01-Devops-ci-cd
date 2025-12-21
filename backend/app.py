@@ -13,6 +13,14 @@ from model import db, Todo   # 👈 IMPORTANT (model, not models)
 app = Flask(__name__)
 
 metrics = PrometheusMetrics(app)
+@app.route("/")
+def home():
+    return "Backend is running", 200
+
+@app.route("/favicon.ico")
+def favicon():
+    return "", 204
+
 
 # Custom app info metric
 metrics.info(
@@ -40,10 +48,15 @@ for i in range(10):
         print("Database not ready, retrying...", e)
         time.sleep(3)
 
+@app.route("/api/todos", methods=["GET", "POST"])
 @app.route("/todos", methods=["GET", "POST"])
 def todos():
     if request.method == "POST":
-        data = request.json
+        data = request.get_json(silent=True)
+
+        if not data or "title" not in data:
+            return jsonify({"error": "title is required"}), 400
+
         todo = Todo(title=data["title"])
         db.session.add(todo)
         db.session.commit()
@@ -51,6 +64,8 @@ def todos():
 
     todos = Todo.query.all()
     return jsonify([t.to_dict() for t in todos])
+
+
 
 @app.route("/health")
 def health():
