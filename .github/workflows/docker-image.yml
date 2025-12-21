@@ -53,12 +53,12 @@ jobs:
     - name: Expose app via Minikube
       run: |
         minikube service nginx --url
-        kubectl port-forward svc/prometheus 9090:9090
+        minikube service prometheus --url
         
 
 
     - name: Expose app via Minikube
       run: |
-        kubectl port-forward svc/grafana 3000:3000
+        minikube service grafana --url
 
       
