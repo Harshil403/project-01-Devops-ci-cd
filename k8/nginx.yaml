@@ -17,6 +17,7 @@ spec:
           image: 904198141789.dkr.ecr.ap-south-1.amazonaws.com/todo-nginx:latest
           ports:
             - containerPort: 80
+
           volumeMounts:
             - name: nginx-config
               mountPath: /etc/nginx/conf.d   # ✅ MOUNT DIRECTORY
