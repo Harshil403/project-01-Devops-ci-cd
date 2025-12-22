@@ -1,2 +1,7 @@
-FROM public.ecr.aws/nginx/nginx:latest
-COPY nginx.conf /etc/nginx/nginx.conf
+FROM nginx:1.25-alpine
+
+# REMOVE default config files
+RUN rm -f /etc/nginx/conf.d/*
+
+# Copy ONLY server config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
