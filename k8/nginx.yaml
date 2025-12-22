@@ -13,16 +13,14 @@ spec:
         app: todo-nginx
     spec:
       containers:
-      - name: nginx
-        image: NGINX_IMAGE_PLACEHOLDER
-        ports:
-        - containerPort: 80
-        volumeMounts:
+        - name: nginx
+          image: 904198141789.dkr.ecr.ap-south-1.amazonaws.com/todo-nginx:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
             - name: nginx-config
-              mountPath: /etc/nginx/conf.d/nginx.conf
+              mountPath: /etc/nginx/conf.d/default.conf   # ✅ CORRECT
               subPath: nginx.conf
-
-      # ✅ ADD THIS PART (volumes)
       volumes:
         - name: nginx-config
           configMap:
@@ -34,8 +32,8 @@ metadata:
   name: nginx
 spec:
   type: LoadBalancer
-  ports:
-    - port: 80
-      nodePort: 30080
   selector:
     app: todo-nginx
+  ports:
+    - port: 80
+      targetPort: 80
