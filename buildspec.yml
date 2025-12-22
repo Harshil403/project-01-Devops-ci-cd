@@ -47,4 +47,10 @@ phases:
       - sed -i "s|NGINX_IMAGE_PLACEHOLDER|$NGINX_IMAGE|g" k8/nginx.yaml
 
       - kubectl apply -f k8/
-      - kubectl apply -f k8/monitoring/
+      - kubectl apply -f k8/monitoring/grafana-deployment.yaml
+      - kubectl apply -f k8/monitoring/grafana-service.yaml
+      - kubectl apply -f k8/monitoring/grafana-pvc.yaml
+      - kubectl apply -f k8/monitoring/prometheus-deployment.yaml
+      - kubectl apply -f k8/monitoring/prometheus-service.yaml
+      - kubectl apply -f k8/monitoring/prometheus-pvc.yaml
+
