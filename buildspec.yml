@@ -50,7 +50,8 @@ phases:
       - kubectl apply -f k8/monitoring/grafana-deployment.yaml
       - kubectl apply -f k8/monitoring/grafana-service.yaml
       - kubectl apply -f k8/monitoring/grafana-pvc.yaml
+      - kubectl apply -f k8/monitoring/grafana-secrets.yaml
       - kubectl apply -f k8/monitoring/prometheus-deployment.yaml
-      - kubectl apply -f k8/monitoring/prometheus-service.yaml
       - kubectl apply -f k8/monitoring/prometheus-pvc.yaml
+      - kubectl apply -f k8/monitoring/prometheus-config.yaml
 
