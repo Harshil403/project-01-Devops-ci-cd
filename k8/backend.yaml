@@ -27,7 +27,8 @@ spec:
 
       containers:
       - name: backend
-        image: BACKEND_IMAGE_PLACEHOLDER
+        image: 904198141789.dkr.ecr.ap-south-1.amazonaws.com/todo-backend:latest
+
         ports:
         - containerPort: 5000
 
