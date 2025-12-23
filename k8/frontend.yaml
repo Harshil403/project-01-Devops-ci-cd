@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: FRONTEND_IMAGE_PLACEHOLDER
+        image: 904198141789.dkr.ecr.ap-south-1.amazonaws.com/todo-frontend:latest
+
         ports:
         - containerPort: 3000
 ---
