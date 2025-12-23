@@ -3,7 +3,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: prometheus-pvc
 spec:
-  storageClassName: gp3-wffc
   accessModes:
     - ReadWriteOnce
   resources:
