@@ -1,9 +1,10 @@
-#FROM nginx:1.25-alpine
-
 FROM nginx:alpine
 
+# Remove all default configs
 RUN rm -rf /etc/nginx/conf.d/*
 
-COPY default.conf /etc/nginx/conf.d/default.conf
+# Replace the MAIN nginx config
+COPY nginx-main.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
+
