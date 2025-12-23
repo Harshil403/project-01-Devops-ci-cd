@@ -1,7 +1,7 @@
 FROM nginx:1.25-alpine
 
-# REMOVE default config files
-RUN rm -f /etc/nginx/conf.d/*
+# Remove default config shipped with image
+RUN rm -f /etc/nginx/conf.d/default.conf
 
-# Copy ONLY server config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copy ONLY server block config
+COPY default.conf /etc/nginx/conf.d/default.conf
