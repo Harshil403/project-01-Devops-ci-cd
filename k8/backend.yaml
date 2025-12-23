@@ -19,10 +19,11 @@ spec:
           - sh
           - -c
           - |
-            until nc -z postgres 5432; do
+            until echo > /dev/tcp/postgres/5432; do
               echo "Waiting for postgres..."
               sleep 3
             done
+
 
       containers:
       - name: backend
