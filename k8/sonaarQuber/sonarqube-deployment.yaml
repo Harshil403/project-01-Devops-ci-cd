@@ -17,7 +17,7 @@ spec:
         - name: sonarqube
           image: sonarqube:lts
           ports:
-            - containerPort: 9000
+            - containerPort: 8080
           resources:
             requests:
               memory: "2Gi"
