@@ -22,6 +22,10 @@ data:
         static_configs:
           - targets:
               - "nginx.default.svc.cluster.local:80"
+            
+      - job_name: "postgres"
+        static_configs:
+          - targets: [postgres-exporter:9187]
 
 
 #      - job_name: "node-exporter"
