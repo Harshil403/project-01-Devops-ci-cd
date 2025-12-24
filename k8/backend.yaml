@@ -13,16 +13,18 @@ spec:
         app: todo-backend
     spec:
       initContainers:
-      - name: wait-for-postgres
-        image: busybox:1.36
-        command:
-          - sh
-          - -c
-          - |
-            until echo > /dev/tcp/postgres/5432; do
+        - name: wait-for-postgres
+          image: busybox:1.36
+          command:
+            - sh
+            - -c
+            - |
               echo "Waiting for postgres..."
-              sleep 3
-            done
+              until nc -z postgres 5432; do
+                echo "Postgres not ready, sleeping..."
+                sleep 2
+              done
+              echo "Postgres is ready!"
 
 
       containers:
