@@ -4,7 +4,7 @@ metadata:
   name: grafana-pvc
   namespace: default
 spec:
-  storageClassName: standard
+  storageClassName: gp3-wffc
   accessModes:
     - ReadWriteOnce
   resources:
