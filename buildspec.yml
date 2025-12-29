@@ -3,8 +3,17 @@ version: 0.2
 env:
   variables:
     CLUSTER_NAME: my-eks-cluster
+    SONAR_TOKEN: squ_8797ba9e7009800ad5ffd6c16adbd3df3932379d
 
 phases:
+  install:
+    runtime-versions:
+      java: corretto17
+    commands:
+      - echo "Installing SonarScanner"
+      - curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
+      - unzip sonar-scanner.zip
+      - export PATH=$PATH:$(pwd)/sonar-scanner-5.0.1.3006-linux/bin
   pre_build:
     commands:
       - echo "Logging in to Amazon ECR"
