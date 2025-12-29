@@ -33,23 +33,13 @@ phases:
       ### ---------------- SONARQUBE BACKEND SCAN ----------------
       - echo "Running SonarQube scan for backend"
       - cd backend
-      - sonar-scanner \
-          -Dsonar.projectKey=todo-backend \
-          -Dsonar.projectName=todo-backend \
-          -Dsonar.sources=. \
-          -Dsonar.host.url=$SONAR_HOST_URL \
-          -Dsonar.login=$SONAR_TOKEN
+      - sonar-scanner -Dsonar.projectKey=todo-backend -Dsonar.projectName=todo-backend -Dsonar.sources=. -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN
       - cd ..
 
       ### ---------------- SONARQUBE FRONTEND SCAN ----------------
       - echo "Running SonarQube scan for frontend"
       - cd frontend
-      - sonar-scanner \
-          -Dsonar.projectKey=todo-frontend \
-          -Dsonar.projectName=todo-frontend \
-          -Dsonar.sources=src \
-          -Dsonar.host.url=$SONAR_HOST_URL \
-          -Dsonar.login=$SONAR_TOKEN
+      - sonar-scanner -Dsonar.projectKey=todo-frontend -Dsonar.projectName=todo-frontend -Dsonar.sources=src -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN
       - cd ..
 
       ### ---------------- DOCKER BUILD ----------------
