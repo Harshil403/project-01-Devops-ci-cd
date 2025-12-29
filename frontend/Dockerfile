@@ -1,26 +1,52 @@
-# -------- Build stage --------
-FROM public.ecr.aws/docker/library/node:18-alpine AS builder
-
+# ---------- Build ----------
+FROM node:18-alpine AS builder
 WORKDIR /app
 
-RUN apk update && apk upgrade openssl
-
-COPY package.json package-lock.json* ./
-RUN npm install
+COPY package*.json ./
+RUN npm ci
 
 COPY . .
 RUN npm run build
 
-# -------- Runtime stage --------
-FROM public.ecr.aws/docker/library/node:18-alpine
+# ---------- Runtime ----------
+FROM nginx:alpine
 
-WORKDIR /app
+# Remove default config
+RUN rm -rf /etc/nginx/conf.d/*
 
-RUN apk update && apk upgrade openssl \
- && npm install -g serve \
- && rm -rf /var/cache/apk/*
+# Use your nginx config
+COPY nginx/nginx-main.conf /etc/nginx/nginx.conf
 
-COPY --from=builder /app/build ./build
+# Copy frontend build
+COPY --from=builder /app/build /usr/share/nginx/html
 
-EXPOSE 3000
-CMD ["serve", "-s", "build", "-l", "3000"]
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
+## -------- Build stage --------
+#FROM public.ecr.aws/docker/library/node:18-alpine AS builder
+#
+#WORKDIR /app
+#
+#RUN apk update && apk upgrade openssl
+#
+#COPY package.json package-lock.json* ./
+#RUN npm install
+#
+#COPY . .
+#RUN npm run build
+#
+## -------- Runtime stage --------
+#FROM public.ecr.aws/docker/library/node:18-alpine
+#
+#WORKDIR /app
+#
+#RUN apk update && apk upgrade openssl \
+# && npm install -g serve \
+# && rm -rf /var/cache/apk/*
+#
+#COPY --from=builder /app/build ./build
+#
+#EXPOSE 3000
+#CMD ["serve", "-s", "build", "-l", "3000"]
+#
