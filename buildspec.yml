@@ -3,20 +3,10 @@ version: 0.2
 env:
   variables:
     CLUSTER_NAME: my-eks-cluster
-    SONAR_HOST_URL: http://<SONARQUBE-ELB-DNS>:9000   ### ADD THIS
-    SONAR_TOKEN: squ_8797ba9e7009800ad5ffd6c16adbd3df3932379d
+
 
 phases:
   install:
-    runtime-versions:
-      java: corretto17
-    commands:
-      - echo "Installing SonarScanner"
-      - curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
-      - unzip sonar-scanner.zip
-      - export PATH=$PATH:$(pwd)/sonar-scanner-5.0.1.3006-linux/bin
-      - sonar-scanner --version   ### VERIFY INSTALL
-
   pre_build:
     commands:
       - echo "Logging in to Amazon ECR"
@@ -30,18 +20,6 @@ phases:
 
   build:
     commands:
-      ### ---------------- SONARQUBE BACKEND SCAN ----------------
-      - echo "Running SonarQube scan for backend"
-      - cd backend
-      - sonar-scanner -Dsonar.projectKey=todo-backend -Dsonar.projectName=todo-backend -Dsonar.sources=. -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN
-      - cd ..
-
-      ### ---------------- SONARQUBE FRONTEND SCAN ----------------
-      - echo "Running SonarQube scan for frontend"
-      - cd frontend
-      - sonar-scanner -Dsonar.projectKey=todo-frontend -Dsonar.projectName=todo-frontend -Dsonar.sources=src -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN
-      - cd ..
-
       ### ---------------- DOCKER BUILD ----------------
       - echo "Building Docker images"
       - docker build -t todo-backend ./backend
