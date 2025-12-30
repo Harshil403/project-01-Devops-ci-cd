@@ -1,5 +1,8 @@
 name: CI-CD to Kubernetes (Self Hosted)
 
+permissions:
+  contents: read
+
 on:
   push:
     branches:
