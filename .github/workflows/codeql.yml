@@ -2,26 +2,23 @@ name: CodeQL Security Scan
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   analyze:
-    name: Analyze source code
     runs-on: ubuntu-latest
     permissions:
-      actions: read
       contents: read
       security-events: write
 
     strategy:
-      fail-fast: false
       matrix:
-        language: [ 'python', 'javascript' ]
+        language: ['python', 'javascript']
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Initialize CodeQL
@@ -29,11 +26,25 @@ jobs:
         with:
           languages: ${{ matrix.language }}
 
-      # Autobuild is required for JS; Python doesn't need compilation
       - name: Autobuild
         uses: github/codeql-action/autobuild@v3
 
-      - name: Perform CodeQL Analysis
+      - name: Run CodeQL analysis
         uses: github/codeql-action/analyze@v3
+
+  trigger-codepipeline:
+    needs: analyze   # 🔐 HARD SECURITY GATE
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          category: "/language:${{ matrix.language }}"
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      - name: Trigger AWS CodePipeline
+        run: |
+          aws codepipeline start-pipeline-execution \
+            --name todo-pipeline-01
