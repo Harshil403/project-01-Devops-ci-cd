@@ -1,4 +1,4 @@
-FROM nginx:alpine
+FROM public.ecr.aws/nginx/nginx:alpine
 
 # Remove all default configs
 RUN rm -rf /etc/nginx/conf.d/*
