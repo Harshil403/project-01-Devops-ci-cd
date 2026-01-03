@@ -47,4 +47,4 @@ jobs:
       - name: Trigger AWS CodePipeline
         run: |
           aws codepipeline start-pipeline-execution \
-            --name todo-pipeline-01
+            --name todo-pipeline-02
