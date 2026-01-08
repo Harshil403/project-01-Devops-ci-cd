@@ -1,0 +1,60 @@
+name: Local CI-CD Todo App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-push-deploy:
+    runs-on: self-hosted   # 🔥 local system runner
+
+    steps:
+    # 1️⃣ Checkout code
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # 2️⃣ Login to Docker Hub
+    - name: Login to Docker Hub
+      run: |
+        echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login \
+        -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+    # 3️⃣ Build Backend Image
+    - name: Build Backend Image
+      run: |
+        docker build \
+          -t ${{ secrets.DOCKERHUB_USERNAME }}/todo-backend:latest \
+          -f backend/Dockerfile backend/
+
+    # 4️⃣ Build Frontend Image
+    - name: Build Frontend Image
+      run: |
+        docker build \
+          -t ${{ secrets.DOCKERHUB_USERNAME }}/todo-frontend:latest \
+          -f frontend/Dockerfile frontend/
+
+    # 5️⃣ Build Nginx Image
+    - name: Build Nginx Image
+      run: |
+        docker build \
+          -t ${{ secrets.DOCKERHUB_USERNAME }}/todo-nginx:latest \
+          -f nginx/Dockerfile nginx/
+
+    # 6️⃣ Push Images
+    - name: Push Docker Images
+      run: |
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/todo-backend:latest
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/todo-frontend:latest
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/todo-nginx:latest
+
+    # 7️⃣ Deploy to Local Kubernetes
+    - name: Deploy to Local Kubernetes
+      run: |
+        kubectl apply -f k8/
+
+    # 8️⃣ Verify Deployment
+    - name: Verify Deployment
+      run: |
+        kubectl get pods
+        kubectl get svc
