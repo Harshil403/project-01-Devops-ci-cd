@@ -51,7 +51,16 @@ jobs:
     # 7️⃣ Deploy to Local Kubernetes
     - name: Deploy to Local Kubernetes
       run: |
-        kubectl apply -f k8/
+        
+        kubectl apply -f k8/postgres-secret.yaml
+        kubectl apply -f k8/postgres-pvc.yaml
+        kubectl apply -f k8/postgres.yaml
+    
+        kubectl apply -f k8/nginx-config.yaml
+    
+        kubectl apply -f k8/backend.yaml
+        kubectl apply -f k8/frontend.yaml
+        kubectl apply -f k8/nginx.yaml
 
     # 8️⃣ Verify Deployment
     - name: Verify Deployment
