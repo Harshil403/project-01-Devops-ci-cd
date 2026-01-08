@@ -4,9 +4,7 @@ from prometheus_flask_exporter import PrometheusMetrics
 import os
 import sys
 import time
-#AWS_SECRET_ACCESS_KEY = "AKIAWQFJ2K9M8Z7LQX9P"
-#AWS_SECRET_KEY = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
-#GITHUB_TOKEN = "ghp_8FJd93kdLslP0a9XkQwEJ3mZP7YbN2R4aA9K"
+
 
 
 
