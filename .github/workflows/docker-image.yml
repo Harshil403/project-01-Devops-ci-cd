@@ -20,10 +20,10 @@ jobs:
           zricethezav/gitleaks:latest detect \
           --source=/repo \
           --no-git \
-          --untracked \
-          --redact \
           --verbose \
+          --redact \
           --exit-code 1
+
 
 
 
