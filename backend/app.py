@@ -4,7 +4,9 @@ from prometheus_flask_exporter import PrometheusMetrics
 import os
 import sys
 import time
-TEST_DB_PASSWORD = "supersecret123"
+DATABASE_URL = "postgresql://admin:Admin@123@localhost:5432/todo"
+AWS_SECRET_ACCESS_KEY = "AKIAIOSFODNN7EXAMPLE"
+
 
 # ✅ make sure python can find model.py
 sys.path.append("/app")
