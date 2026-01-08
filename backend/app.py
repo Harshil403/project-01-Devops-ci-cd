@@ -4,6 +4,7 @@ from prometheus_flask_exporter import PrometheusMetrics
 import os
 import sys
 import time
+TEST_DB_PASSWORD = "supersecret123"
 
 # ✅ make sure python can find model.py
 sys.path.append("/app")
