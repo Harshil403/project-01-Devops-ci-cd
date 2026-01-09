@@ -22,7 +22,7 @@ jobs:
          gitguardian/ggshield:latest \
          ggshield secret scan path /src \
          --show-secrets \
-         --exit-zero=false
+         
       
 #    - name: Run Gitleaks (Verbose + Redacted)
 #      run: |
