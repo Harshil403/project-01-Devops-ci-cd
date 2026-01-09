@@ -13,20 +13,27 @@ jobs:
     # 1️⃣ Checkout code
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Run Gitleaks (Verbose + Redacted)
+
+    - name: Run TruffleHog (Finds & Shows Secret Location)
       run: |
         docker run --rm \
-          -v $PWD:/repo \
-          zricethezav/gitleaks:latest detect \
-          --source=/repo \
-          --no-git \
-          --verbose \
-          --redact \
-          --exit-code 1
-
-
-
-
+           -v ${PWD}:/pwd \
+           trufflesecurity/trufflehog:latest \
+           git file:///pwd \
+           --fail \
+           --no-update
+      
+#    - name: Run Gitleaks (Verbose + Redacted)
+#      run: |
+#        docker run --rm \
+#          -v $PWD:/repo \
+#          zricethezav/gitleaks:latest detect \
+#          --source=/repo \
+#          --no-git \
+#          --verbose \
+#          --redact \
+#          --exit-code 1
+      
 
     # 2️⃣ Login to Docker Hub
     - name: Login to Docker Hub
