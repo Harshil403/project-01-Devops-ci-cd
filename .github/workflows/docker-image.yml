@@ -20,7 +20,7 @@ jobs:
          -e GITGUARDIAN_API_KEY=${{ secrets.GITGUARDIAN_API_KEY }} \
          -v ${PWD}:/src \
          gitguardian/ggshield:latest \
-         ggshield secret scan path -r /src \
+         ggshield secret scan path -r /src -y \
          --show-secrets \
          
       
