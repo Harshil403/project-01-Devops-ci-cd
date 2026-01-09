@@ -20,7 +20,6 @@ jobs:
       uses: gitguardian/ggshield-action@v1
       with:
         mode: ci
-        args: --all-secrets
       env:
           GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
           GITHUB_PUSH_BASE_SHA: ${{ github.event.base_ref }}
