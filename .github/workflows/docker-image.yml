@@ -16,11 +16,11 @@ jobs:
 
     - name: GitGuardian Scan
       run: |
-        docker run --rm \
+          docker run --rm \
           -e GITGUARDIAN_API_KEY=${{ secrets.GITGUARDIAN_API_KEY }} \
           -v ${PWD}:/src \
           gitguardian/ggshield:latest \
-          secret scan path /src \
+          ggshield secret scan path /src \
           --show-secrets \
           --exit-zero=false
       
