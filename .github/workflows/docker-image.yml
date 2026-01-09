@@ -16,13 +16,13 @@ jobs:
 
     - name: GitGuardian Scan
       run: |
-          docker run --rm \
-          -e GITGUARDIAN_API_KEY=${{ secrets.GITGUARDIAN_API_KEY }} \
-          -v ${PWD}:/src \
-          gitguardian/ggshield:latest \
-          ggshield secret scan path /src \
-          --show-secrets \
-          --exit-zero=false
+        docker run --rm \
+        -e GITGUARDIAN_API_KEY=${{ secrets.GITGUARDIAN_API_KEY }} \
+        -v ${PWD}:/src \
+        gitguardian/ggshield:latest \
+        ggshield secret scan path /src \
+        --show-secrets \
+        --exit-zero=false
       
 #    - name: Run Gitleaks (Verbose + Redacted)
 #      run: |
