@@ -14,14 +14,15 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Run TruffleHog (Finds & Shows Secret Location)
+    - name: GitGuardian Scan
       run: |
         docker run --rm \
-           -v ${PWD}:/pwd \
-           trufflesecurity/trufflehog:latest \
-           git file:///pwd \
-           --fail \
-           --no-update
+          -e GITGUARDIAN_API_KEY=${{ secrets.GITGUARDIAN_API_KEY }} \
+          -v ${PWD}:/src \
+          gitguardian/ggshield:latest \
+          secret scan path /src \
+          --show-secrets \
+          --exit-zero=false
       
 #    - name: Run Gitleaks (Verbose + Redacted)
 #      run: |
