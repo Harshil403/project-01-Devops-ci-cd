@@ -6,6 +6,23 @@ import sys
 import time
 
 
+# 3. Stripe Live Secret Key (Pattern: sk_live_...)
+stripe_key = "sk_live_51GxK0xHl5xK0xHl5xK0xHl5xK0xHl5xK0xHl5"
+
+# 4. Slack Bot Token (Pattern: xoxb-...)
+slack_token = "xoxb-123456789012-1234567890123-4a5b6c7d8e9f0g1h2i3j4k5l"
+
+# 5. Google API Key (Pattern: AIza...)
+google_api_key = "AIzaSyD-1234567890abcdef1234567890abcde"
+
+# 6. Database Connection String (URI containing password)
+db_url = "postgres://admin:SuperSecretPassword123@db-prod.company.com:5432/users"
+
+# 7. Generic Private Key Header
+private_key = """-----BEGIN RSA PRIVATE KEY-----
+MIIEpQIBAAKCAQEA3Tz2mr7SZiAMfQyuvBjM9Oi..
+-----END RSA PRIVATE KEY-----"""
+
 
 
 # ✅ make sure python can find model.py
