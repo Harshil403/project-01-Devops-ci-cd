@@ -16,15 +16,27 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: GitGuardian Scan
-      uses: gitguardian/ggshield-action@v1
+    - name: Run TruffleHog
+      uses: trufflesecurity/trufflehog@main
       with:
-        mode: ci
-      env:
-          GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
-          GITHUB_PUSH_BASE_SHA: ${{ github.event.base_ref }}
-          GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
+          # Scans the current directory
+        path: ./
+          # Optional: Only fail for secrets that are actually live/active (reduces false positives)
+          # Remove this line if you want to catch EVERYTHING (even inactive keys)
+        extra_args: --only-verified
+          # Fail the build if secrets are found
+        fail: true
+
+
+#    - name: GitGuardian Scan
+#      uses: gitguardian/ggshield-action@v1
+#      with:
+#        mode: ci
+#      env:
+#          GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
+#          GITHUB_PUSH_BASE_SHA: ${{ github.event.base_ref }}
+#          GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+#          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
        
       
 #    - name: Run Gitleaks (Verbose + Redacted)
