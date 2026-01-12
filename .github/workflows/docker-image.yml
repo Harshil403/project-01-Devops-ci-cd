@@ -23,9 +23,7 @@ jobs:
         path: ./
           # Optional: Only fail for secrets that are actually live/active (reduces false positives)
           # Remove this line if you want to catch EVERYTHING (even inactive keys)
-        extra_args: --only-verified
-          # Fail the build if secrets are found
-        fail: true
+
 
 
 #    - name: GitGuardian Scan
