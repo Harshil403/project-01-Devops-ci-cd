@@ -16,15 +16,6 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Run TruffleHog
-      uses: trufflesecurity/trufflehog@main
-      with:
-        path: ./
-        base: ""    # Forces scan from the very first commit
-        head: HEAD  # Scans up to the current commit
-
-
-
     - name: GitGuardian Scan
       uses: gitguardian/ggshield-action@v1
       with:
