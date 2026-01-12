@@ -19,10 +19,10 @@ jobs:
     - name: Run TruffleHog
       uses: trufflesecurity/trufflehog@main
       with:
-          # Scans the current directory
         path: ./
-          # Optional: Only fail for secrets that are actually live/active (reduces false positives)
-          # Remove this line if you want to catch EVERYTHING (even inactive keys)
+        base: "" # setting this to empty forces a full scan
+        head: "" # setting this to empty forces a full scan
+        extra_args: --debug --only-verified
 
 
 
