@@ -20,9 +20,8 @@ jobs:
       uses: trufflesecurity/trufflehog@main
       with:
         path: ./
-        base: "" # setting this to empty forces a full scan
-        head: "" # setting this to empty forces a full scan
-        extra_args: --debug --only-verified
+        base: ""    # Forces scan from the very first commit
+        head: HEAD  # Scans up to the current commit
 
 
 
