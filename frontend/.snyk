@@ -9,7 +9,9 @@ ignore:
         created: 2026-01-16T06:28:53.711Z
   SNYK-JS-WEBPACKDEVSERVER-1030075:
     - '*':
-        reason: 'CRA dev dependency, accepted risk'
-        expires: 2026-02-15T06:28:58.009Z
-        created: 2026-01-16T06:28:58.013Z
+        reason: >-
+          CRA transitive dependency (webpack-dev-server), accepted risk until
+          migration
+        expires: 2026-02-15T06:30:58.327Z
+        created: 2026-01-16T06:30:58.331Z
 patch: {}
