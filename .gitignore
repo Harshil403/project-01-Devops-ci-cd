@@ -1,0 +1,21 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Environment files
+.env
+.env.*
+
+# OS files
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
