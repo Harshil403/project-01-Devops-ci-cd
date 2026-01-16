@@ -45,11 +45,19 @@ jobs:
 
 
     
-    - name: Snyk Frontend Dependency Scan
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: "18"
+    - name: Install Frontend Dependencies
+      run: npm install
+      working-directory: frontend
+    - name: Snyk Frontend Dependency Scan (React)
       run: npx snyk test --severity-threshold=high
       working-directory: frontend
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
 
 
 
