@@ -27,8 +27,13 @@ jobs:
           GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
 
 
-    - name: Dependency Scan
-      run: snyk test --severity-threshold=high
+    - name: Snyk Dependency Scan
+      uses: snyk/actions/node@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        args: --severity-threshold=high
+
 
       
 #    - name: Run Gitleaks (Verbose + Redacted)
