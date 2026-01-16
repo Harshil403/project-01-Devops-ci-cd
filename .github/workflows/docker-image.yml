@@ -27,11 +27,21 @@ jobs:
           GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
 
 
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+    
+    - name: Install Backend Dependencies
+      run: pip install -r requirements.txt
+      working-directory: backend
+    
     - name: Snyk Backend Dependency Scan (Python)
-      run: npx snyk test --file=requirements.txt --severity-threshold=high
+      run: npx snyk test --severity-threshold=high
       working-directory: backend
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
 
 
     
