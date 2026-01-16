@@ -25,7 +25,11 @@ jobs:
           GITHUB_PUSH_BASE_SHA: ${{ github.event.base_ref }}
           GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
           GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
-       
+
+
+    - name: Dependency Scan
+      run: snyk test --severity-threshold=high
+
       
 #    - name: Run Gitleaks (Verbose + Redacted)
 #      run: |
