@@ -27,11 +27,12 @@ jobs:
           GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
 
 
-    - name: Snyk Backend Dependency Scan
-      run: npx snyk test --severity-threshold=high
+    - name: Snyk Backend Dependency Scan (Python)
+      run: npx snyk test --file=requirements.txt --severity-threshold=high
       working-directory: backend
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
 
     
     - name: Snyk Frontend Dependency Scan
