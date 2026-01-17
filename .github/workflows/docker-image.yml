@@ -63,7 +63,7 @@ jobs:
 
 
       
-#    - name: Run Gitleaks (Verbose + Redacted)
+#    - name: Run Gitleaks 
 #      run: |
 #        docker run --rm \
 #          -v $PWD:/repo \
