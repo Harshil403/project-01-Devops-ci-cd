@@ -28,17 +28,6 @@ jobs:
 
 
       
-#    - name: Run Gitleaks 
-#      run: |
-#        docker run --rm \
-#          -v $PWD:/repo \
-#          zricethezav/gitleaks:latest detect \
-#          --source=/repo \
-#          --no-git \
-#          --verbose \
-#          --redact \
-#          --exit-code 1
-      
 
     # 2️⃣ Login to Docker Hub
     - name: Login to Docker Hub
