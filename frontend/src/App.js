@@ -56,7 +56,3 @@ google_api_key = "AIzaSyD-1234567890abcdef1234567890abcde"
 # 6. Database Connection String (URI containing password)
 db_url = "postgres://admin:SuperSecretPassword123@db-prod.company.com:5432/users"
 
-# 7. Generic Private Key Header
-private_key = """-----BEGIN RSA PRIVATE KEY-----
-MIIEpQIBAAKCAQEA3Tz2mr7SZiAMfQyuvBjM9Oi..
------END RSA PRIVATE KEY-----"""
