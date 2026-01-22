@@ -2,3 +2,12 @@
 !Dockerfile
 !default.conf
 !nginx-main.conf
+# Ignore everything by default
+*
+
+# Allow only required files
+!Dockerfile
+!nginx-main.conf
+!certs/
+!certs/*.crt
+!certs/*.key
