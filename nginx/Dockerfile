@@ -1,10 +1,13 @@
 FROM public.ecr.aws/nginx/nginx:alpine
 
-# Remove all default configs
+# Remove default configs
 RUN rm -rf /etc/nginx/conf.d/*
 
-# Replace the MAIN nginx config
+# Copy Nginx config
 COPY nginx-main.conf /etc/nginx/nginx.conf
 
-EXPOSE 80
+# Copy TLS certificates
+COPY certs /etc/nginx/certs
 
+EXPOSE 80
+EXPOSE 443
