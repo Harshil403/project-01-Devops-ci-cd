@@ -1,4 +1,4 @@
-name: CodeQL Security Scan
+name: DevSecOps Security Pipeline
 
 on:
   push:
@@ -7,8 +7,27 @@ on:
     branches: ["main"]
 
 jobs:
-  analyze:
+
+
+  gitguardian-scan:
     runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: GitGuardian scan
+        uses: GitGuardian/ggshield-action@v1.25.0
+        with:
+          args: scan repo .
+        env:
+          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
+
+
+  analyze:
+    needs: gitguardian-scan
+    runs-on: ubuntu-latest
+
     permissions:
       contents: read
       security-events: write
@@ -32,8 +51,9 @@ jobs:
       - name: Run CodeQL analysis
         uses: github/codeql-action/analyze@v3
 
+  
   trigger-codepipeline:
-    needs: analyze   # 🔐 HARD SECURITY GATE
+    needs: analyze   
     runs-on: ubuntu-latest
 
     steps:
@@ -47,4 +67,4 @@ jobs:
       - name: Trigger AWS CodePipeline
         run: |
           aws codepipeline start-pipeline-execution \
-            --name todo-pipeline-033
+          --name todo-pipeline-0333
