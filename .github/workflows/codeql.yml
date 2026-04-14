@@ -18,10 +18,10 @@ jobs:
 
       - name: GitGuardian scan
         uses: GitGuardian/ggshield-action@v1.25.0
+        with:
+          args: repo --latest
         env:
           GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
-        with:
-          args: secret scan repo . --latest
 
   analyze:
     needs: gitguardian-scan
