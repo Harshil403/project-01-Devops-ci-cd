@@ -1,7 +1,0 @@
-[ v3_client ]
-basicConstraints = CA:FALSE
-keyUsage = critical, digitalSignature
-extendedKeyUsage = clientAuth
-subjectKeyIdentifier = hash
-authorityKeyIdentifier = keyid,issuer
-

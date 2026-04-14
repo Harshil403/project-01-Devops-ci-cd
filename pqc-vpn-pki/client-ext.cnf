@@ -1,9 +1,0 @@
-[ v3_client ]
-basicConstraints = CA:FALSE
-keyUsage = digitalSignature
-extendedKeyUsage = clientAuth
-
-# ZTA attributes
-1.2.3.4.5.1 = ASN1:UTF8String:intern
-1.2.3.4.5.2 = ASN1:UTF8String:laptop
-1.2.3.4.5.3 = ASN1:UTF8String:engineering
