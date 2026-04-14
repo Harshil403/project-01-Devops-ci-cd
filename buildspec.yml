@@ -43,7 +43,6 @@ phases:
 
       - echo "Deploying to EKS"
       - aws eks update-kubeconfig --region $AWS_REGION --name $CLUSTER_NAME
-      - kubectl get nodes
       - kubectl apply -f k8/
       - kubectl rollout restart deployment todo-backend
       - kubectl rollout restart deployment todo-frontend
