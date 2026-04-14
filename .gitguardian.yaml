@@ -3,3 +3,7 @@ version: 2
 paths:
   ignore:
     - nginx/certs/**
+
+secrets:
+  ignore:
+    - sha: 33b544868d443afb07d3c0c4aad9832389345f3bd3c3e76d3b10f607d6585b
