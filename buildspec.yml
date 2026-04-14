@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    CLUSTER_NAME: my-eks-cluster
+    CLUSTER_NAME: todo-cluster-01
 
 phases:
   install:
@@ -43,6 +43,7 @@ phases:
 
       - echo "Deploying to EKS"
       - aws eks update-kubeconfig --region $AWS_REGION --name $CLUSTER_NAME
+      - kubectl get nodes
       - kubectl apply -f k8/
       - kubectl rollout restart deployment todo-backend
       - kubectl rollout restart deployment todo-frontend
