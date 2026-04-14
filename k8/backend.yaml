@@ -15,6 +15,7 @@ spec:
       initContainers:
         - name: wait-for-postgres
           image: busybox:1.36
+          imagePullPolicy: IfNotPresent
           command:
             - sh
             - -c
@@ -29,8 +30,7 @@ spec:
 
       containers:
       - name: backend
-    #    image: 904198141789.dkr.ecr.ap-south-1.amazonaws.com/todo-backend:latest
-        image: harshil403/todo-backend:latest
+        image: 904198141789.dkr.ecr.ap-south-1.amazonaws.com/todo-backend:latest
 
         ports:
         - containerPort: 5000
