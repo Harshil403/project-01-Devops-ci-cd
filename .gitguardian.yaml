@@ -1,2 +1,5 @@
-paths-ignore:
-  - pqc-vpn-pki/**
+version: 2
+
+paths:
+  ignore:
+    - pqc-vpn-pki/**
