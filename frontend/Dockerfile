@@ -6,7 +6,7 @@ WORKDIR /app
 RUN apk update && apk upgrade openssl
 
 COPY package.json package-lock.json* ./
-RUN npm install
+RUN npm ci
 
 COPY . .
 RUN npm run build
