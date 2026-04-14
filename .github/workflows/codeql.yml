@@ -15,11 +15,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1   
 
       - name: GitGuardian scan
         uses: GitGuardian/ggshield-action@v1.25.0
-        with:
-          args: repo --latest
         env:
           GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
 
