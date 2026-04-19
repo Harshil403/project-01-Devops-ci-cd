@@ -69,36 +69,36 @@ def todos():
 
 
 
-@app.route("/api/todos", methods=["GET", "POST"])
-@app.route("/todos", methods=["GET", "POST"])
-def todos():
-    # ---------- POST ----------
-    if request.method == "POST":
-        data = request.get_json(silent=True)
-
-        if not data or "title" not in data:
-            return jsonify({"error": "title is required"}), 400
-
-        todo = Todo(title=data["title"])
-        db.session.add(todo)
-        db.session.commit()
-
-        return jsonify({"message": "Todo added"}), 201
-
-    # ---------- GET ----------
-    title = request.args.get("title")
-
-    if title:
-        # ❌ SQL Injection vulnerability (FOR CodeQL TEST ONLY)
-
-        
-        result = db.session.execute(
-            f"SELECT * FROM todo WHERE title = '{title}'"
-        )
-        return jsonify([dict(row) for row in result])
-
-    todos = Todo.query.all()
-    return jsonify([t.to_dict() for t in todos])
+#@app.route("/api/todos", methods=["GET", "POST"])
+#@app.route("/todos", methods=["GET", "POST"])
+#def todos():
+#    # ---------- POST ----------
+#    if request.method == "POST":
+#        data = request.get_json(silent=True)
+#
+#        if not data or "title" not in data:
+#            return jsonify({"error": "title is required"}), 400
+#
+#        todo = Todo(title=data["title"])
+#        db.session.add(todo)
+#        db.session.commit()
+#
+#        return jsonify({"message": "Todo added"}), 201
+#
+#    # ---------- GET ----------
+#    title = request.args.get("title")
+#
+#    if title:
+#        # ❌ SQL Injection vulnerability (FOR CodeQL TEST ONLY)
+#
+#        
+#        result = db.session.execute(
+#            f"SELECT * FROM todo WHERE title = '{title}'"
+#        )
+#        return jsonify([dict(row) for row in result])
+#
+#    todos = Todo.query.all()
+#    return jsonify([t.to_dict() for t in todos])
 
 
 
