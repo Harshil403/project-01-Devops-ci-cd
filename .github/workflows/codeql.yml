@@ -49,6 +49,8 @@ jobs:
 
       - name: Run CodeQL analysis
         uses: github/codeql-action/analyze@v3
+        with:
+          fail-on: error
 
   
   trigger-codepipeline:
