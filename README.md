@@ -8,7 +8,7 @@ Primary workloads run in **Mumbai (ap-south-1)**, with **Singapore (ap-southeast
 
 ---
 
-## 🏗️ High-Level Architecture
+## 🏗️ High-Level Architecture.
 
 1. Developer pushes code to GitHub
 2. GitHub Actions pipeline starts
