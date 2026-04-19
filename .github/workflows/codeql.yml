@@ -22,6 +22,8 @@ jobs:
         uses: GitGuardian/ggshield-action@v1.25.0
         env:
           GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
+        with:
+          args: scan repo --verbose
 
   analyze:
     needs: gitguardian-scan
@@ -55,13 +57,13 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           echo "Checking CodeQL alerts..."
-      
+
           alerts=$(gh api \
             repos/${{ github.repository }}/code-scanning/alerts \
             --jq '[.[] | select(.state=="open" and (.rule.severity=="error" or .rule.severity=="warning"))] | length')
-      
+
           echo "Open alerts: $alerts"
-      
+
           if [ "$alerts" -gt 0 ]; then
             echo "❌ Vulnerabilities found! Failing pipeline..."
             exit 1
