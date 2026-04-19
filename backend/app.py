@@ -90,6 +90,8 @@ def todos():
 
     if title:
         # ❌ SQL Injection vulnerability (FOR CodeQL TEST ONLY)
+
+        
         result = db.session.execute(
             f"SELECT * FROM todo WHERE title = '{title}'"
         )
