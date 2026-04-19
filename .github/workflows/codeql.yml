@@ -22,8 +22,6 @@ jobs:
         uses: GitGuardian/ggshield-action@v1.25.0
         env:
           GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
-        with:
-          args: secret scan repo --verbose
 
   analyze:
     needs: gitguardian-scan
