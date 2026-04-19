@@ -1,3 +1,2 @@
-#paths-ignore:
-#  - nginx/certs/**
-#
+paths-ignore:
+  - nginx/certs/**
